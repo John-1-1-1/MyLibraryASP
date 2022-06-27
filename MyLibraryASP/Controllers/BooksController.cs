@@ -53,14 +53,14 @@ namespace MyLibraryASP.Controllers
         public IActionResult Create()
         {
 
-            var countries = from d in _context.Autor
+            var autors = from d in _context.Autor
                             select new
                             {
                                 Id = d.Id,
                                 Name = d.Lastname + " " + d.Name + " " + d.MiddleName
                             };
 
-            ViewData["AutorId"] = new SelectList(countries, "Id", "Name");
+            ViewData["AutorId"] = new SelectList(autors, "Id", "Name");
             ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Name");
             ViewData["LableId"] = new SelectList(_context.Set<Lable>(), "Id", "Name");
             ViewData["ShelfId"] = new SelectList(_context.Set<Shelf>(), "Id", "Name");
@@ -110,7 +110,7 @@ namespace MyLibraryASP.Controllers
                 }
             }
 
-            var countries = from d in _context.Autor
+            var autors = from d in _context.Autor
                             select new
                             {
                                 Id = d.Id,
@@ -118,7 +118,7 @@ namespace MyLibraryASP.Controllers
                             };
 
 
-            ViewData["AutorId"] = new SelectList(countries, "Id", "Name");
+            ViewData["AutorId"] = new SelectList(autors, "Id", "Name");
             ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Name", book.CategoryId);
             ViewData["LableId"] = new SelectList(_context.Set<Lable>(), "Id", "Name", book.LableId);
             ViewData["ShelfId"] = new SelectList(_context.Set<Shelf>(), "Id", "Name", book.ShelfId);
@@ -138,14 +138,14 @@ namespace MyLibraryASP.Controllers
             {
                 return NotFound();
             }
-            var countries = from d in _context.Autor
+            var autors = from d in _context.Autor
                             select new
                             {
                                 Id = d.Id,
                                 Name = d.Lastname + " " + d.Name + " " + d.MiddleName
                             };
 
-            ViewData["AutorId"] = new SelectList(countries, "Id", "Name");
+            ViewData["AutorId"] = new SelectList(autors, "Id", "Name");
             ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Name", book.CategoryId);
             ViewData["LableId"] = new SelectList(_context.Set<Lable>(), "Id", "Name", book.LableId);
             ViewData["ShelfId"] = new SelectList(_context.Set<Shelf>(), "Id", "Name", book.ShelfId);
@@ -223,49 +223,19 @@ namespace MyLibraryASP.Controllers
             }
             if (book.Name != null || book.Name != "")
                 return RedirectToAction(nameof(Index));
-            var countries = from d in _context.Autor
+            var autors = from d in _context.Autor
                             select new
                             {
                                 Id = d.Id,
                                 Name = d.Lastname + " " + d.Name + " " + d.MiddleName
                             };
 
-            ViewData["AutorName"] = new SelectList(countries, "Id", "Name");
+            ViewData["AutorName"] = new SelectList(autors, "Id", "Name");
             ViewData["CategoryName"] = new SelectList(_context.Set<Category>(), "Id", "Name", book.CategoryId);
             ViewData["LableName"] = new SelectList(_context.Set<Lable>(), "Id", "Name", book.LableId);
             ViewData["ShelfName"] = new SelectList(_context.Set<Shelf>(), "Id", "Name", book.ShelfId);
 
             return Redirect("/Books/Index");
-            //if (id != book.Id)
-            //{
-            //    return NotFound();
-            //}
-
-            //if (ModelState.IsValid)
-            //{
-            //    try
-            //    {
-            //        _context.Update(book);
-            //        await _context.SaveChangesAsync();
-            //    }
-            //    catch (DbUpdateConcurrencyException)
-            //    {
-            //        if (!BookExists(book.Id))
-            //        {
-            //            return NotFound();
-            //        }
-            //        else
-            //        {
-            //            throw;
-            //        }
-            //    }
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //ViewData["AutorId"] = new SelectList(_context.Autor, "Id", "Id", book.AutorId);
-            //ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", book.CategoryId);
-            //ViewData["LableId"] = new SelectList(_context.Set<Lable>(), "Id", "Id", book.LableId);
-            //ViewData["ShelfId"] = new SelectList(_context.Set<Shelf>(), "Id", "Id", book.ShelfId);
-            //return View(book);
         }
 
         // GET: Books/Delete/5
